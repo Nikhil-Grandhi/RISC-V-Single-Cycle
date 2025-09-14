@@ -1,21 +1,15 @@
 module top (
     input logic clk,
-    input logic reset,
-    output logic [15:0] out
+    input logic reset
 );
 
 wire [31:0] pc_out, instr_out, dmem_read_data;
 wire [31:0] dmem_write_data, dmem_write_addr, result;
 wire reg_write, alu_src, pc_src, mem_write;
-wire [31:0] result, out_temp;
 
 wire [1:0] imm_src, result_src;
 wire [2:0] alu_control;
 wire zero_flag;
-
-wire slow_clk;
-
-clkdiv divider (clk, slow_clk);
 
 // Control Unit
 control control_unit (
@@ -34,7 +28,7 @@ control control_unit (
 
 // Datapath
 datapath dp (
-    .clk(slow_clk),
+    .clk(clk),
     .reset(reset),
     .instr(instr_out),
     .Read_data(dmem_read_data),
@@ -59,7 +53,7 @@ imem instruction_memory (
 
 // Data Memory
 dmem data_memory (
-    .clk(slow_clk),
+    .clk(clk),
     .A(dmem_write_addr),
     .WD(dmem_write_data),
     .WE(mem_write),
@@ -67,22 +61,4 @@ dmem data_memory (
     .single_mem(out_temp)
 );
 
-assign out = out_temp[15:0];
-
-endmodule
-
-module clkdiv (input clk, output reg clkout);
-    reg[31:0] count;
-    always @(posedge clk)
-    begin 
-        count <= count + 1;
-
-        if (count == 50000000) 
-        begin
-            clkout <= ~clkout;
-            count <= 0;
-        end
-
-    end
-    
 endmodule
