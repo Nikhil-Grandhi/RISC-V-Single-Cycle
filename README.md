@@ -21,7 +21,7 @@ The datapath connects the core functional units of the processor. Based on a cla
 ### Control Unit
 
 The control unit is responsible for generating all the necessary control signals for the datapath based on the instruction's opcode. It is composed of two main modules:
-* **Main Decoder (`main_dec.sv`)**: Takes the 7-bit opcode as input and generates the primary control signals, including `reg_write`, `mem_write`, `alu_src`, `branch`, and `jump`.
+* **Main Decoder (`main_dec.sv`)**: Takes the 7-bit opcode as input and generates the primary control signals, including `reg_write`, `mem_write`, `alu_src`, `branch` (For both BEQ and BNE cases using funct3), and `jump`.
 * **ALU Decoder (`ALU_dec.sv`)**: Determines the specific operation the ALU should perform. It uses the `ALU_op` signal from the main decoder, as well as `funct3` and `funct7` fields from the instruction.
 
 ---
