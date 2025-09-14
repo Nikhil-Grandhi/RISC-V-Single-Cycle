@@ -19,6 +19,7 @@ wire branch, jump;
 main_dec md (
     .opcode(opcode),
     .zero(zero),
+    .func3(funct3),
     .alu_op(alu_op),
     .reg_write(reg_write),
     .mem_write(mem_write),
