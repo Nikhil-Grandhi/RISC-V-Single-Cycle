@@ -1,12 +1,13 @@
 module main_dec (
     input [6:0] opcode,
     input zero,
+    input [2:0] func3,
     output logic [1:0] alu_op,
     output logic reg_write,
     output logic mem_write,
     output logic [1:0] Imm_src,
     output logic [1:0] Result_src,
-    output logic alu_src,
+    output logic alu_src, 
     output logic branch,
     output logic jump
 );
@@ -48,10 +49,13 @@ always @(*) begin
         reg_write = 1'b0;
         mem_write = 1'b0;
         Imm_src = 2'b10;
-        branch = 1'b1;
         Result_src = 2'b00;
         alu_src = 1'b0;
         jump = 1'b0;
+        case (func3)
+        3'b000: branch = zero;
+        3'b001: branch = !zero;
+        endcase
     end
     7'b0010011: begin
         alu_op = 2'b10;
