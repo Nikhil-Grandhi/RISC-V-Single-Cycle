@@ -36,7 +36,7 @@ The processor implements a core subset of the RV32I ISA, covering essential oper
 | **I-type** | `addi` | `0010011` | Add immediate value to a register. |
 | **I-type** | `lw` | `0000011` | Load word from memory into a register. |
 | **S-type** | `sw` | `0100011` | Store word from a register into memory. |
-| **B-type** | `beq` | `1100011` | Branch if two registers are equal. |
+| **B-type** | `beq`, `bne` | `1100011` | Branch if two registers are equal. |
 | **J-type** | `jal` | `1101111` | Jump and Link; store `PC+4` and jump to target. |
 
 ---
